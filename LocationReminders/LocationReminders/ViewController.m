@@ -69,6 +69,12 @@
 
 }
 - (IBAction)location2ButtonPressed:(id)sender {
+    CLLocationCoordinate2D coordinateTwo = CLLocationCoordinate2DMake(41.390205, 2.154007);
+    
+    MKCoordinateRegion regionTwo = MKCoordinateRegionMakeWithDistance(coordinateTwo, 500.00, 500.00);
+    
+    [self.mapView setRegion:regionTwo animated:YES];
+    
 }
 
 - (IBAction)location3ButtonPressed:(id)sender {
