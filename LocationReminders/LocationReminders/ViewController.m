@@ -68,6 +68,12 @@
     [self.mapView setRegion:region animated:YES];
 
 }
+- (IBAction)location2ButtonPressed:(id)sender {
+}
+
+- (IBAction)location3ButtonPressed:(id)sender {
+}
+
 
 
 
