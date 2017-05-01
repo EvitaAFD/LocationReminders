@@ -23,35 +23,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+//    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
+//    
+//    testObject[@"testName"] = @"Eve Denison";
+//    
+//    [testObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+//        if (succeeded) {
+//            NSLog(@"Success in saving test obejct.");
+//        }else {
+//            NSLog(@"There was a problem saving.  Save Error: %@",  error.localizedDescription);
+//        }
+//        
+//    }];
+//    
+//    PFQuery *query = [PFQuery queryWithClassName:@"TestObject"];
+//    
+//    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+//        if (error) {
+//            NSLog(@"%@", error.localizedDescription);
+//        }else {
+//            NSLog(@"Query results %@", objects);
+//        }
+//    }];
+    
     [self requestPermissions];
     self.mapView.showsUserLocation = YES;
     
 }
-
-//    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-//
-//    testObject[@"testName"] = @"Eve Denison";
-//
-//    [testObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-//        if succeeded {
-//            NSLog(@"Success in saving test obejct.");
-//        }else {
-//            NSLog(@"There was a problem saving.  Save Error: %@",  error.localizedDescription);    
-//        }
-//
-//    }];
-//
-//    PFQuery *query = [PFQuery queryWithClassName:@"TestObject"];
-//
-//[query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable orror) {
-//    if (error) {
-//        NSLog(@"%@", error.localizedDescription);
-//    }else {
-//        NSLog(@"Query results %@", objects);
-//    }
-//
-//})];
-
 
 -(void)requestPermissions {
     self.locationManager = [[CLLocationManager alloc]init];
@@ -79,15 +77,13 @@
 }
 
 - (IBAction)location3ButtonPressed:(id)sender {
-    CLLocationCoordinate2D coordinateThree = CLLocationCoordinate2DMake(47.3769, 8.5417);
+    CLLocationCoordinate2D coordinateThree = CLLocationCoordinate2DMake(47.3769, 9.3902);
     
     MKCoordinateRegion regionThree = MKCoordinateRegionMakeWithDistance(coordinateThree, 500.00, 500.00);
     
     [self.mapView setRegion:regionThree animated:YES];
     
 }
-
-
 
 
 - (void)didReceiveMemoryWarning {
