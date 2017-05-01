@@ -7,15 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5005AF0F1EB7C7F000119EFF /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5005AF0A1EB7C7E200119EFF /* Bolts.framework */; };
+		5005AF101EB7C7F000119EFF /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5005AF0D1EB7C7E200119EFF /* Parse.framework */; };
 		5086F1921EB7AD31009AEDE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5086F1911EB7AD31009AEDE9 /* main.m */; };
 		5086F1951EB7AD31009AEDE9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5086F1941EB7AD31009AEDE9 /* AppDelegate.m */; };
 		5086F1981EB7AD31009AEDE9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5086F1971EB7AD31009AEDE9 /* ViewController.m */; };
 		5086F19B1EB7AD31009AEDE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5086F1991EB7AD31009AEDE9 /* Main.storyboard */; };
 		5086F19D1EB7AD31009AEDE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5086F19C1EB7AD31009AEDE9 /* Assets.xcassets */; };
 		5086F1A01EB7AD31009AEDE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5086F19E1EB7AD31009AEDE9 /* LaunchScreen.storyboard */; };
+		5086F1BF1EB7BBB0009AEDE9 /* Bolts.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5086F1BA1EB7BBA1009AEDE9 /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5086F1C01EB7BBB0009AEDE9 /* Parse.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5086F1BB1EB7BBA1009AEDE9 /* Parse.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5086F1C41EB7C0C1009AEDE9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5086F1C31EB7C0C1009AEDE9 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		5086F1BE1EB7BBA6009AEDE9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5086F1BF1EB7BBB0009AEDE9 /* Bolts.framework in CopyFiles */,
+				5086F1C01EB7BBB0009AEDE9 /* Parse.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		5005AF071EB7C7E200119EFF /* 1C63E6BE-24A4-37AA-98B5-1B7FB2A55075.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "1C63E6BE-24A4-37AA-98B5-1B7FB2A55075.bcsymbolmap"; sourceTree = "<group>"; };
+		5005AF081EB7C7E200119EFF /* 7E948BF7-6512-314C-8E9B-F4C9A9DA475B.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "7E948BF7-6512-314C-8E9B-F4C9A9DA475B.bcsymbolmap"; sourceTree = "<group>"; };
+		5005AF091EB7C7E200119EFF /* 9897FED9-4FFB-3DD8-B187-C2C0236BF4C9.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "9897FED9-4FFB-3DD8-B187-C2C0236BF4C9.bcsymbolmap"; sourceTree = "<group>"; };
+		5005AF0A1EB7C7E200119EFF /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		5005AF0B1EB7C7E200119EFF /* Bolts.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Bolts.framework.dSYM; sourceTree = "<group>"; };
+		5005AF0C1EB7C7E200119EFF /* E5BB7ADD-62A8-3DFB-8D0F-17F0F13CCB1C.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "E5BB7ADD-62A8-3DFB-8D0F-17F0F13CCB1C.bcsymbolmap"; sourceTree = "<group>"; };
+		5005AF0D1EB7C7E200119EFF /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		5005AF0E1EB7C7E200119EFF /* Parse.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Parse.framework.dSYM; sourceTree = "<group>"; };
 		5086F18D1EB7AD31009AEDE9 /* LocationReminders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationReminders.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5086F1911EB7AD31009AEDE9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5086F1931EB7AD31009AEDE9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -26,6 +53,9 @@
 		5086F19C1EB7AD31009AEDE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5086F19F1EB7AD31009AEDE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5086F1A11EB7AD31009AEDE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5086F1BA1EB7BBA1009AEDE9 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Carthage/Build/iOS/Bolts.framework; sourceTree = "<group>"; };
+		5086F1BB1EB7BBA1009AEDE9 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Carthage/Build/iOS/Parse.framework; sourceTree = "<group>"; };
+		5086F1C31EB7C0C1009AEDE9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +63,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5005AF0F1EB7C7F000119EFF /* Bolts.framework in Frameworks */,
+				5005AF101EB7C7F000119EFF /* Parse.framework in Frameworks */,
+				5086F1C41EB7C0C1009AEDE9 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5005AF061EB7C7E200119EFF /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				5005AF071EB7C7E200119EFF /* 1C63E6BE-24A4-37AA-98B5-1B7FB2A55075.bcsymbolmap */,
+				5005AF081EB7C7E200119EFF /* 7E948BF7-6512-314C-8E9B-F4C9A9DA475B.bcsymbolmap */,
+				5005AF091EB7C7E200119EFF /* 9897FED9-4FFB-3DD8-B187-C2C0236BF4C9.bcsymbolmap */,
+				5005AF0A1EB7C7E200119EFF /* Bolts.framework */,
+				5005AF0B1EB7C7E200119EFF /* Bolts.framework.dSYM */,
+				5005AF0C1EB7C7E200119EFF /* E5BB7ADD-62A8-3DFB-8D0F-17F0F13CCB1C.bcsymbolmap */,
+				5005AF0D1EB7C7E200119EFF /* Parse.framework */,
+				5005AF0E1EB7C7E200119EFF /* Parse.framework.dSYM */,
+			);
+			name = iOS;
+			path = Carthage/Build/iOS;
+			sourceTree = "<group>";
+		};
 		5086F1841EB7AD31009AEDE9 = {
 			isa = PBXGroup;
 			children = (
 				5086F18F1EB7AD31009AEDE9 /* LocationReminders */,
 				5086F18E1EB7AD31009AEDE9 /* Products */,
+				5086F1A71EB7B43E009AEDE9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,6 +129,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		5086F1A71EB7B43E009AEDE9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5005AF061EB7C7E200119EFF /* iOS */,
+				5086F1C31EB7C0C1009AEDE9 /* MapKit.framework */,
+				5086F1BA1EB7BBA1009AEDE9 /* Bolts.framework */,
+				5086F1BB1EB7BBA1009AEDE9 /* Parse.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -89,6 +150,7 @@
 				5086F1891EB7AD31009AEDE9 /* Sources */,
 				5086F18A1EB7AD31009AEDE9 /* Frameworks */,
 				5086F18B1EB7AD31009AEDE9 /* Resources */,
+				5086F1BE1EB7BBA6009AEDE9 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -112,6 +174,11 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = UG659HW99G;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -276,6 +343,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = UG659HW99G;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = LocationReminders/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.evedenison.LocationReminders;
@@ -288,6 +359,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = UG659HW99G;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = LocationReminders/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.evedenison.LocationReminders;
@@ -314,6 +389,7 @@
 				5086F1A61EB7AD31009AEDE9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
