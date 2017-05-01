@@ -57,6 +57,10 @@
 
 }
 
+-(void)setMapStyle {
+    self.mapView.mapType = MKMapTypeSatellite;
+}
+
 
 - (IBAction)location1ButtonPressed:(id)sender {
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.6566674, -122.351096);
@@ -64,7 +68,7 @@
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 500.00, 500.00);
     
     [self.mapView setRegion:region animated:YES];
-
+    [self setMapStyle];
 }
 - (IBAction)location2ButtonPressed:(id)sender {
     CLLocationCoordinate2D coordinateTwo = CLLocationCoordinate2DMake(41.390205, 2.154007);
@@ -73,7 +77,7 @@
     
     
     [self.mapView setRegion:regionTwo animated:YES];
-    
+    [self setMapStyle];
 }
 
 - (IBAction)location3ButtonPressed:(id)sender {
@@ -82,8 +86,10 @@
     MKCoordinateRegion regionThree = MKCoordinateRegionMakeWithDistance(coordinateThree, 500.00, 500.00);
     
     [self.mapView setRegion:regionThree animated:YES];
-    
+    [self setMapStyle];
+
 }
+
 
 
 - (void)didReceiveMemoryWarning {
