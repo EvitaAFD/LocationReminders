@@ -50,7 +50,25 @@
     self.mapView.mapType = MKMapTypeSatellite;
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [super prepareForSegue:segue sender:sender];
+    
+    if ([segue.identifier isEqualToString:@"AddReminderViewController"] && [sender isKindOfClass:[MKPinAnnotationView class]]) {
+        
+        MKPinAnnotationView *annotationView = (MKPinAnnotationView *)sender;
+        
+        AddReminderViewController *newReminderViewController = (AddReminderViewController *)segue.destinationViewController;
+        
+        newReminderViewController.coordinate = annotationView.annotation.coordinate;
+        newReminderViewController.annotationTitle = annotationView.annotation.title;
+        newReminderViewController.title = annotationView.annotation.title; 
+        
+    }
+    
+}
 
+
+//MARK: Actions
 - (IBAction)location1ButtonPressed:(id)sender {
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.6566674, -122.351096);
     
@@ -100,7 +118,7 @@
     }
 }
 
-//MARK: didUpdateLocation
+//MARK: locationManager didUpdateLocation delegate
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
 
     CLLocation *location = locations.lastObject;
@@ -110,7 +128,7 @@
     [self.mapView setRegion:region animated:YES];
 }
 
-//MARK: Apply Annotation View
+//MARK: mapView delegatation methods
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
 //Ensure custom pins don't override user's pins
@@ -135,5 +153,14 @@
     
     return annotationView;
 }
+
+-(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+
+    NSLog(@"Info Accessory Tapped!");
+
+    
+    [self performSegueWithIdentifier:@"AddReminderViewController" sender:view];
+}
+
 
 @end
