@@ -10,6 +10,9 @@
 
 @interface AddReminderViewController ()
 
+@property (weak, nonatomic) IBOutlet UITextField *reminderNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *radiusTextField;
+
 @end
 
 @implementation AddReminderViewController
@@ -20,5 +23,7 @@
     NSLog(@"Annotation Title: %@", self.annotationTitle);
     NSLog(@"Coordinates: Latitude %f, Longitude %f", self.coordinate.latitude, self.coordinate.longitude);
 }
+
+
 
 @end

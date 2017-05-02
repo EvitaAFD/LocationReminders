@@ -10,12 +10,20 @@
 
 @import CoreLocation;
 
-@interface LocationController : NSObject
+@protocol LocationControllerDelegate <NSObject>
+@required
+- (void)locationControllerUpdatedLocation:(CLLocation *)location;
 
-+(LocationController *)sharedInstance;
+@end
+
+@interface LocationController : NSObject <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
-@property (strong, nonatomic) CLLocation *location;
-@property (weak, nonatomic) id delegate;
+@property (strong, nonatomic) CLLocation *currentLocation;
+@property (weak, nonatomic) id<LocationControllerDelegate> delegate;
+
++(LocationController *)sharedInstance;
+-(void)requestPermissions;
+
 
 @end
