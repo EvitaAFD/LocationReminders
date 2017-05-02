@@ -10,6 +10,7 @@
 		5005AF0F1EB7C7F000119EFF /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5005AF0A1EB7C7E200119EFF /* Bolts.framework */; };
 		5005AF101EB7C7F000119EFF /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5005AF0D1EB7C7E200119EFF /* Parse.framework */; };
 		50223BEF1EB8FF2100251C2B /* AddReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50223BEE1EB8FF2100251C2B /* AddReminderViewController.m */; };
+		50223BF21EB9225700251C2B /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50223BF11EB9225700251C2B /* LocationController.m */; };
 		5086F1921EB7AD31009AEDE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5086F1911EB7AD31009AEDE9 /* main.m */; };
 		5086F1951EB7AD31009AEDE9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5086F1941EB7AD31009AEDE9 /* AppDelegate.m */; };
 		5086F1981EB7AD31009AEDE9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5086F1971EB7AD31009AEDE9 /* ViewController.m */; };
@@ -46,6 +47,8 @@
 		5005AF0E1EB7C7E200119EFF /* Parse.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Parse.framework.dSYM; sourceTree = "<group>"; };
 		50223BED1EB8FF2100251C2B /* AddReminderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddReminderViewController.h; sourceTree = "<group>"; };
 		50223BEE1EB8FF2100251C2B /* AddReminderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddReminderViewController.m; sourceTree = "<group>"; };
+		50223BF01EB9225700251C2B /* LocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationController.h; sourceTree = "<group>"; };
+		50223BF11EB9225700251C2B /* LocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationController.m; sourceTree = "<group>"; };
 		5086F18D1EB7AD31009AEDE9 /* LocationReminders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationReminders.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5086F1911EB7AD31009AEDE9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5086F1931EB7AD31009AEDE9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -94,6 +97,8 @@
 		50223BEA1EB8E97200251C2B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				50223BF01EB9225700251C2B /* LocationController.h */,
+				50223BF11EB9225700251C2B /* LocationController.m */,
 				5086F1931EB7AD31009AEDE9 /* AppDelegate.h */,
 				5086F1941EB7AD31009AEDE9 /* AppDelegate.m */,
 			);
@@ -247,6 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50223BF21EB9225700251C2B /* LocationController.m in Sources */,
 				50223BEF1EB8FF2100251C2B /* AddReminderViewController.m in Sources */,
 				5086F1981EB7AD31009AEDE9 /* ViewController.m in Sources */,
 				5086F1951EB7AD31009AEDE9 /* AppDelegate.m in Sources */,
