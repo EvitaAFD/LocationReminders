@@ -53,12 +53,14 @@
 
 - (IBAction)location1ButtonPressed:(id)sender {
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.6566674, -122.351096);
+    
 //Amount of map displayed on screen in meters
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 500.00, 500.00);
     
     [self.mapView setRegion:region animated:YES];
     [self setMapStyle];
 }
+
 - (IBAction)location2ButtonPressed:(id)sender {
     CLLocationCoordinate2D coordinateTwo = CLLocationCoordinate2DMake(41.390205, 2.154007);
     
@@ -77,6 +79,25 @@
     [self.mapView setRegion:regionThree animated:YES];
     [self setMapStyle];
 
+}
+
+- (IBAction)userLongPressedMap:(UILongPressGestureRecognizer *)sender {
+    
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        
+//Where user touched map
+        CGPoint touchPoint = [sender locationInView:self.mapView];
+        
+//Converts user touch into location on map
+        CLLocationCoordinate2D coordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+        
+        MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
+        
+        newPoint.coordinate = coordinate;
+        newPoint.title = @"New Location";
+        
+        [self.mapView addAnnotation:newPoint];
+    }
 }
 
 //MARK: didUpdateLocation
@@ -106,7 +127,7 @@
     }
     
     annotationView.canShowCallout = YES;
-//    annotationView.animatesDrop = YES;
+    annotationView.animatesDrop = YES;
     
     UIButton *rightCalloutAccessory = [UIButton buttonWithType:UIButtonTypeDetailDisclosure]; //callout button
     
