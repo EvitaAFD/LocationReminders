@@ -7,11 +7,12 @@
 //
 
 #import "ViewController.h"
+#import "AddReminderViewController.h"
 
 @import Parse;
 @import MapKit;
 
-@interface ViewController () <CLLocationManagerDelegate>
+@interface ViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -23,31 +24,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-//    
-//    testObject[@"testName"] = @"Eve Denison";
-//    
-//    [testObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-//        if (succeeded) {
-//            NSLog(@"Success in saving test obejct.");
-//        }else {
-//            NSLog(@"There was a problem saving.  Save Error: %@",  error.localizedDescription);
-//        }
-//        
-//    }];
-//    
-//    PFQuery *query = [PFQuery queryWithClassName:@"TestObject"];
-//    
-//    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-//        if (error) {
-//            NSLog(@"%@", error.localizedDescription);
-//        }else {
-//            NSLog(@"Query results %@", objects);
-//        }
-//    }];
-    
     [self requestPermissions];
+    
     self.mapView.showsUserLocation = YES;
+    
+    self.mapView.delegate = self;
+    
     
 }
 
@@ -97,7 +79,7 @@
 
 }
 
-
+//MARK: didUpdateLocation
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
 
     CLLocation *location = locations.lastObject;
@@ -105,6 +87,32 @@
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(location.coordinate, 200.00, 200.00);
     
     [self.mapView setRegion:region animated:YES];
+}
+
+//MARK: Apply Annotation View
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    
+//Ensure custom pins don't override user's pins
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        return nil;
+    }
+    
+    MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"annotationView"];
+    
+    annotationView.annotation = annotation;
+    
+    if (!annotationView) {
+        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"annotationView"];
+    }
+    
+    annotationView.canShowCallout = YES;
+//    annotationView.animatesDrop = YES;
+    
+    UIButton *rightCalloutAccessory = [UIButton buttonWithType:UIButtonTypeDetailDisclosure]; //callout button
+    
+    annotationView.rightCalloutAccessoryView = rightCalloutAccessory;
+    
+    return annotationView;
 }
 
 @end
