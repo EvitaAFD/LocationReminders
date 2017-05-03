@@ -22,8 +22,15 @@
     
     NSLog(@"Annotation Title: %@", self.annotationTitle);
     NSLog(@"Coordinates: Latitude %f, Longitude %f", self.coordinate.latitude, self.coordinate.longitude);
+    
+    UIBarButtonItem *doneButton = [[[UIBarButtonItem alloc]init]initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(dismissReminderViewController)];
+    [[self navigationItem] setRightBarButtonItem:doneButton];
+    
 }
 
+-(void)dismissReminderViewController {
+    [[self navigationController] popViewControllerAnimated:YES];
 
+}
 
 @end

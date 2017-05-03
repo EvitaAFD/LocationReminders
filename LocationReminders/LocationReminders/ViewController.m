@@ -103,7 +103,7 @@
         MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
         
         newPoint.coordinate = coordinate;
-        newPoint.title = @"New Location";
+        newPoint.title = @"My New Location";
         
         [self.mapView addAnnotation:newPoint];
     }
