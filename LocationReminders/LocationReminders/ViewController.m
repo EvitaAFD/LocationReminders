@@ -193,7 +193,7 @@
     MKCircleRenderer *renderer = [[MKCircleRenderer alloc] initWithCircle:overlay];
     
     renderer.strokeColor = [UIColor blueColor];
-    renderer.fillColor = [UIColor greenColor];
+    renderer.fillColor = [UIColor colorWithRed:0.22 green:0.94 blue:0.89 alpha:1.0];
     renderer.alpha = 0.25;
     
     return renderer;
