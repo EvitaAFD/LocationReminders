@@ -159,10 +159,13 @@
     
     MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"annotationView"];
     
+    
     annotationView.annotation = annotation;
     
+
     if (!annotationView) {
         annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"annotationView"];
+        [annotationView setPinTintColor:[UIColor colorWithHue:drand48() saturation:1.0 brightness:1.0 alpha:1.0]];
     }
     
     annotationView.canShowCallout = YES;
@@ -192,9 +195,9 @@
 -(MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
     MKCircleRenderer *renderer = [[MKCircleRenderer alloc] initWithCircle:overlay];
     
-    renderer.strokeColor = [UIColor blueColor];
+    renderer.strokeColor = [UIColor colorWithRed:0.62 green:0.22 blue:0.94 alpha:1.0];
     renderer.fillColor = [UIColor colorWithRed:0.22 green:0.94 blue:0.89 alpha:1.0];
-    renderer.alpha = 0.25;
+    renderer.alpha = 0.30;
     
     return renderer;
 
