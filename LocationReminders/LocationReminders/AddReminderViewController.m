@@ -32,6 +32,16 @@
         NSLog(@"Annotation Title: %@", self.annotationTitle);
         NSLog(@"Coordinates: Latitude %f, Longitude %f", self.coordinate.latitude, self.coordinate.longitude);
         NSLog(@"Save reminder sucessful:%i - Error: %@", succeeded,error.localizedDescription);
+        
+        if (self.completion) {
+            
+            CGFloat radius = 100; //lab coming from UISlider
+            
+            MKCircle *circle = [MKCircle circleWithCenterCoordinate:self.coordinate radius:radius];
+            
+            self.completion(circle);
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }];
     
     
