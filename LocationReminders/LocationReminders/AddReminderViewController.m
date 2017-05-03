@@ -33,12 +33,15 @@
         NSLog(@"Coordinates: Latitude %f, Longitude %f", self.coordinate.latitude, self.coordinate.longitude);
         NSLog(@"Save reminder sucessful:%i - Error: %@", succeeded,error.localizedDescription);
         
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReminderSavedToParse" object:nil]; 
+        
         if (self.completion) {
             
             CGFloat radius = 100; //lab coming from UISlider
             
             MKCircle *circle = [MKCircle circleWithCenterCoordinate:self.coordinate radius:radius];
-            
+
+//Execute block
             self.completion(circle);
             [self.navigationController popViewControllerAnimated:YES];
         }

@@ -35,6 +35,8 @@
     
     [[LocationController sharedInstance] setDelegate:self];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reminderSavedToParse:) name:@"reminderSavedToParse" object:nil];
+    
 }
 
 -(void)setMapStyle {
@@ -53,6 +55,7 @@
         newReminderViewController.coordinate = annotationView.annotation.coordinate;
         newReminderViewController.annotationTitle = annotationView.annotation.title;
         newReminderViewController.title = annotationView.annotation.title;
+        
        
 //hulk strong reference bruce weak pointer, makes bridge into block to avoid retain cycle
         __weak typeof(self) bruce = self;
@@ -69,6 +72,16 @@
     
 }
 
+-(void)reminderSavedToParse:(id)sender {
+
+    NSLog(@"Do some stuff since our reminder was saved!");
+    
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ReminderSavedToParse" object:nil];
+
+}
 
 //MARK: Actions
 - (IBAction)location1ButtonPressed:(id)sender {
