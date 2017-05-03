@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gjt-0V-kE3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,6 +25,10 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LEV-kJ-w7B">
                                 <rect key="frame" x="56" y="100" width="263" height="467"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="tJR-ph-49Z" appends="YES" id="Gjr-90-qVg"/>
+                                </connections>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXb-L2-CBp">
                                 <rect key="frame" x="148" y="575" width="80" height="30"/>
@@ -41,7 +46,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OdQ-oI-mxW">
                                 <rect key="frame" x="202" y="614" width="133" height="36"/>
-                                <state key="normal" title="Zurich, Zwitzerland"/>
+                                <state key="normal" title="Zurich, Switzerland"/>
                                 <connections>
                                     <action selector="location3ButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JXl-Dh-Y8d"/>
                                 </connections>
@@ -63,11 +68,93 @@
                             <constraint firstItem="LEV-kJ-w7B" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.7" id="xz6-f4-jDN"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="7bh-gK-xqc"/>
                     <connections>
                         <outlet property="mapView" destination="LEV-kJ-w7B" id="x7R-K4-5xu"/>
+                        <segue destination="Rh0-mg-Zun" kind="show" identifier="AddReminderViewController" id="mSm-g0-Tbq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="tJR-ph-49Z">
+                    <connections>
+                        <action selector="userLongPressedMap:" destination="BYZ-38-t0r" id="YBv-c8-lpw"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1079.2" y="118.29085457271366"/>
+        </scene>
+        <!--Add Reminder View Controller-->
+        <scene sceneID="sYy-mG-n5P">
+            <objects>
+                <viewController id="Rh0-mg-Zun" customClass="AddReminderViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9eJ-Jd-RrM"/>
+                        <viewControllerLayoutGuide type="bottom" id="c44-0o-wZy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SEL-cT-lje">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Your Location Reminder" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Fl-nM-R8H">
+                                <rect key="frame" x="48" y="72" width="279" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Reminder Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jd9-JU-otP">
+                                <rect key="frame" x="60" y="170" width="255" height="22"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Radius" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WGW-M1-P2g">
+                                <rect key="frame" x="60" y="266" width="255" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Mq2-XM-TYh"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Jd9-JU-otP" firstAttribute="top" secondItem="9eJ-Jd-RrM" secondAttribute="bottom" constant="106" id="37f-zz-1Vb"/>
+                            <constraint firstItem="WGW-M1-P2g" firstAttribute="leading" secondItem="Jd9-JU-otP" secondAttribute="leading" id="5uV-Fn-0DE"/>
+                            <constraint firstItem="3Fl-nM-R8H" firstAttribute="centerX" secondItem="SEL-cT-lje" secondAttribute="centerX" id="8WU-eu-NWa"/>
+                            <constraint firstItem="WGW-M1-P2g" firstAttribute="top" secondItem="Jd9-JU-otP" secondAttribute="bottom" constant="74" id="BFk-CG-MJB"/>
+                            <constraint firstAttribute="trailing" secondItem="Jd9-JU-otP" secondAttribute="trailing" constant="60" id="FwS-us-c66"/>
+                            <constraint firstItem="c44-0o-wZy" firstAttribute="top" secondItem="3Fl-nM-R8H" secondAttribute="bottom" constant="566" id="QWc-8O-amg"/>
+                            <constraint firstItem="3Fl-nM-R8H" firstAttribute="top" secondItem="9eJ-Jd-RrM" secondAttribute="bottom" constant="8" symbolic="YES" id="ikl-TQ-rpu"/>
+                            <constraint firstItem="3Fl-nM-R8H" firstAttribute="leading" secondItem="SEL-cT-lje" secondAttribute="leadingMargin" constant="32" id="ubt-xS-M79"/>
+                            <constraint firstItem="WGW-M1-P2g" firstAttribute="trailing" secondItem="Jd9-JU-otP" secondAttribute="trailing" id="vNb-h3-saH"/>
+                            <constraint firstItem="Jd9-JU-otP" firstAttribute="leading" secondItem="SEL-cT-lje" secondAttribute="leading" constant="60" id="wFB-ds-IVr"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="radiusTextField" destination="WGW-M1-P2g" id="ffD-gb-2mP"/>
+                        <outlet property="reminderNameTextField" destination="Jd9-JU-otP" id="WOg-bv-obb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BTr-Zq-KdB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1964" y="117.39130434782609"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="tqM-Fl-mg3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gjt-0V-kE3" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oNE-m8-3S9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="9Dv-zM-bf0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WzV-IX-e4n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="140" y="118.29085457271366"/>
         </scene>

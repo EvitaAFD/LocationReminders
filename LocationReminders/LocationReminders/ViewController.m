@@ -7,14 +7,17 @@
 //
 
 #import "ViewController.h"
+#import "AddReminderViewController.h"
+
+#import "LocationController.h"
 
 @import Parse;
 @import MapKit;
 
-@interface ViewController ()
+@interface ViewController () <MKMapViewDelegate, LocationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (strong, nonatomic) CLLocationManager *locationManager;
+
 
 @end
 
@@ -23,53 +26,50 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-//    
-//    testObject[@"testName"] = @"Eve Denison";
-//    
-//    [testObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-//        if (succeeded) {
-//            NSLog(@"Success in saving test obejct.");
-//        }else {
-//            NSLog(@"There was a problem saving.  Save Error: %@",  error.localizedDescription);
-//        }
-//        
-//    }];
-//    
-//    PFQuery *query = [PFQuery queryWithClassName:@"TestObject"];
-//    
-//    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-//        if (error) {
-//            NSLog(@"%@", error.localizedDescription);
-//        }else {
-//            NSLog(@"Query results %@", objects);
-//        }
-//    }];
     
-    [self requestPermissions];
     self.mapView.showsUserLocation = YES;
     
-}
-
--(void)requestPermissions {
-    self.locationManager = [[CLLocationManager alloc]init];
-    [self.locationManager requestAlwaysAuthorization];
-
+    self.mapView.delegate = self;
+    
+    [self setMapStyle];
+    
+    [[LocationController sharedInstance] setDelegate:self];
+    
 }
 
 -(void)setMapStyle {
     self.mapView.mapType = MKMapTypeSatellite;
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [super prepareForSegue:segue sender:sender];
+    
+    if ([segue.identifier isEqualToString:@"AddReminderViewController"] && [sender isKindOfClass:[MKPinAnnotationView class]]) {
+        
+        MKPinAnnotationView *annotationView = (MKPinAnnotationView *)sender;
+        
+        AddReminderViewController *newReminderViewController = (AddReminderViewController *)segue.destinationViewController;
+        
+        newReminderViewController.coordinate = annotationView.annotation.coordinate;
+        newReminderViewController.annotationTitle = annotationView.annotation.title;
+        newReminderViewController.title = annotationView.annotation.title; 
+        
+    }
+    
+}
 
+
+//MARK: Actions
 - (IBAction)location1ButtonPressed:(id)sender {
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.6566674, -122.351096);
     
+//Amount of map displayed on screen in meters
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 500.00, 500.00);
     
     [self.mapView setRegion:region animated:YES];
     [self setMapStyle];
 }
+
 - (IBAction)location2ButtonPressed:(id)sender {
     CLLocationCoordinate2D coordinateTwo = CLLocationCoordinate2DMake(41.390205, 2.154007);
     
@@ -90,11 +90,64 @@
 
 }
 
+- (IBAction)userLongPressedMap:(UILongPressGestureRecognizer *)sender {
+    
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        
+//Where user touched map
+        CGPoint touchPoint = [sender locationInView:self.mapView];
+        
+//Converts user touch into location on map
+        CLLocationCoordinate2D coordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+        
+        MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
+        
+        newPoint.coordinate = coordinate;
+        newPoint.title = @"My New Location";
+        
+        [self.mapView addAnnotation:newPoint];
+    }
+}
 
+//MARK: mapView delegatation methods
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    
+//Ensure custom pins don't override user's pins
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        return nil;
+    }
+    
+    MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"annotationView"];
+    
+    annotationView.annotation = annotation;
+    
+    if (!annotationView) {
+        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"annotationView"];
+    }
+    
+    annotationView.canShowCallout = YES;
+    annotationView.animatesDrop = YES;
+    
+    UIButton *rightCalloutAccessory = [UIButton buttonWithType:UIButtonTypeDetailDisclosure]; //callout button
+    
+    annotationView.rightCalloutAccessoryView = rightCalloutAccessory;
+    
+    return annotationView;
+}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+
+    NSLog(@"Info Accessory Tapped!");
+
+    
+    [self performSegueWithIdentifier:@"AddReminderViewController" sender:view];
+}
+
+- (void)locationControllerUpdatedLocation:(CLLocation *)location {
+    
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(location.coordinate, 200.00, 200.00);
+    
+    [self.mapView setRegion:region animated:YES];
 }
 
 
