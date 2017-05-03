@@ -8,6 +8,8 @@
 
 #import "AddReminderViewController.h"
 
+#import "Reminder.h"
+
 @interface AddReminderViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *reminderNameTextField;
@@ -20,8 +22,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"Annotation Title: %@", self.annotationTitle);
-    NSLog(@"Coordinates: Latitude %f, Longitude %f", self.coordinate.latitude, self.coordinate.longitude);
+    Reminder *newReminder = [Reminder object];
+    
+    newReminder.reminderName = self.annotationTitle;
+    
+    newReminder.location = [PFGeoPoint geoPointWithLatitude:self.coordinate.latitude longitude:self.coordinate.longitude];
+    
+    [newReminder saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        NSLog(@"Annotation Title: %@", self.annotationTitle);
+        NSLog(@"Coordinates: Latitude %f, Longitude %f", self.coordinate.latitude, self.coordinate.longitude);
+        NSLog(@"Save reminder sucessful:%i - Error: %@", succeeded,error.localizedDescription);
+    }];
+    
+    
+    
     
     UIBarButtonItem *doneButton = [[[UIBarButtonItem alloc]init]initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(dismissReminderViewController)];
     [[self navigationItem] setRightBarButtonItem:doneButton];

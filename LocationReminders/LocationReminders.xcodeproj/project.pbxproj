@@ -20,6 +20,7 @@
 		5086F1BF1EB7BBB0009AEDE9 /* Bolts.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5086F1BA1EB7BBA1009AEDE9 /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5086F1C01EB7BBB0009AEDE9 /* Parse.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5086F1BB1EB7BBA1009AEDE9 /* Parse.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5086F1C41EB7C0C1009AEDE9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5086F1C31EB7C0C1009AEDE9 /* MapKit.framework */; };
+		50DC82461EBA465F007BF7EE /* Reminder.m in Sources */ = {isa = PBXBuildFile; fileRef = 50DC82451EBA465F007BF7EE /* Reminder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,6 +63,8 @@
 		5086F1BA1EB7BBA1009AEDE9 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Carthage/Build/iOS/Bolts.framework; sourceTree = "<group>"; };
 		5086F1BB1EB7BBA1009AEDE9 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Carthage/Build/iOS/Parse.framework; sourceTree = "<group>"; };
 		5086F1C31EB7C0C1009AEDE9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		50DC82441EBA465F007BF7EE /* Reminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reminder.h; sourceTree = "<group>"; };
+		50DC82451EBA465F007BF7EE /* Reminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reminder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,10 +100,12 @@
 		50223BEA1EB8E97200251C2B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				50223BF01EB9225700251C2B /* LocationController.h */,
-				50223BF11EB9225700251C2B /* LocationController.m */,
 				5086F1931EB7AD31009AEDE9 /* AppDelegate.h */,
 				5086F1941EB7AD31009AEDE9 /* AppDelegate.m */,
+				50223BF01EB9225700251C2B /* LocationController.h */,
+				50223BF11EB9225700251C2B /* LocationController.m */,
+				50DC82441EBA465F007BF7EE /* Reminder.h */,
+				50DC82451EBA465F007BF7EE /* Reminder.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -253,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50223BF21EB9225700251C2B /* LocationController.m in Sources */,
+				50DC82461EBA465F007BF7EE /* Reminder.m in Sources */,
 				50223BEF1EB8FF2100251C2B /* AddReminderViewController.m in Sources */,
 				5086F1981EB7AD31009AEDE9 /* ViewController.m in Sources */,
 				5086F1951EB7AD31009AEDE9 /* AppDelegate.m in Sources */,
