@@ -14,7 +14,9 @@
 @import Parse;
 @import MapKit;
 
-@interface ViewController () <MKMapViewDelegate, LocationControllerDelegate>
+#import <ParseUI/ParseUI.h>
+
+@interface ViewController () <MKMapViewDelegate, LocationControllerDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
@@ -36,6 +38,15 @@
     [[LocationController sharedInstance] setDelegate:self];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reminderSavedToParse:) name:@"reminderSavedToParse" object:nil];
+    
+    if (![PFUser currentUser]) {
+        PFLogInViewController *loginViewController = [[PFLogInViewController alloc] init];
+        
+        loginViewController.delegate = self;
+        loginViewController.signUpController.delegate = self;
+        
+        [self presentViewController:loginViewController animated:YES completion:nil];
+    }
     
 }
 
@@ -182,6 +193,16 @@
     
     return renderer;
 
+}
+
+-(void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
+
+    [self  dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
+
+    [self  dismissViewControllerAnimated:YES completion:nil];
 }
 
 
