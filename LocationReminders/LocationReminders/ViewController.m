@@ -37,6 +37,8 @@
     
     [[LocationController sharedInstance] setDelegate:self];
     
+    [PFUser logOut];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reminderSavedToParse:) name:@"reminderSavedToParse" object:nil];
     
     if (![PFUser currentUser]) {
@@ -44,6 +46,10 @@
         
         loginViewController.delegate = self;
         loginViewController.signUpController.delegate = self;
+        
+        loginViewController.fields = PFLogInFieldsUsernameAndPassword | PFLogInFieldsLogInButton | PFLogInFieldsFacebook | PFLogInFieldsSignUpButton;
+        
+        loginViewController.logInView.logo = [[UIView alloc] init];
         
         [self presentViewController:loginViewController animated:YES completion:nil];
     }
@@ -86,7 +92,6 @@
 -(void)reminderSavedToParse:(id)sender {
 
     NSLog(@"Do some stuff since our reminder was saved!");
-    
 }
 
 -(void)dealloc{

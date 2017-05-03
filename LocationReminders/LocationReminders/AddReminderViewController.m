@@ -22,6 +22,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UIBarButtonItem *doneButton = [[[UIBarButtonItem alloc]init]initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(dismissReminderViewController)];
+    [[self navigationItem] setRightBarButtonItem:doneButton];
+    
+}
+
+-(void)savePressedDismissReminderViewController {
+    
+    [self saveNewReminder];
+    [[self navigationController] popViewControllerAnimated:YES];
+    
+}
+
+-(void)saveNewReminder {
+    
     Reminder *newReminder = [Reminder object];
     
     newReminder.reminderName = self.annotationTitle;
@@ -33,30 +47,21 @@
         NSLog(@"Coordinates: Latitude %f, Longitude %f", self.coordinate.latitude, self.coordinate.longitude);
         NSLog(@"Save reminder sucessful:%i - Error: %@", succeeded,error.localizedDescription);
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReminderSavedToParse" object:nil]; 
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReminderSavedToParse" object:nil];
         
         if (self.completion) {
             
-            CGFloat radius = 100; //lab coming from UISlider
+            NSString *reminderName = self.reminderNameTextField.text;
+            
+            CGFloat radius = [self.radiusTextField.text floatValue];
             
             MKCircle *circle = [MKCircle circleWithCenterCoordinate:self.coordinate radius:radius];
-
-//Execute block
+            
+            //Execute block
             self.completion(circle);
             [self.navigationController popViewControllerAnimated:YES];
         }
     }];
-    
-    
-    
-    
-    UIBarButtonItem *doneButton = [[[UIBarButtonItem alloc]init]initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(dismissReminderViewController)];
-    [[self navigationItem] setRightBarButtonItem:doneButton];
-    
-}
-
--(void)dismissReminderViewController {
-    [[self navigationController] popViewControllerAnimated:YES];
 
 }
 
