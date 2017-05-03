@@ -210,5 +210,16 @@
     [self  dismissViewControllerAnimated:YES completion:nil];
 }
 
+-(void)fecthedReminder {
+    PFQuery *reminder = [PFQuery queryWithClassName:@"Reminder"];
+    [reminder findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error Fetching Reminder %@", error.localizedDescription);
+        } else {
+            NSLog(@"Success Fetching Reminder!");
+        }
+    }];
+}
+
 
 @end

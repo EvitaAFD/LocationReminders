@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *doneButton = [[[UIBarButtonItem alloc]init]initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(dismissReminderViewController)];
+    UIBarButtonItem *doneButton = [[[UIBarButtonItem alloc]init]initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(savePressedDismissReminderViewController)];
     [[self navigationItem] setRightBarButtonItem:doneButton];
     
 }
@@ -60,6 +60,8 @@
             //Execute block
             self.completion(circle);
             [self.navigationController popViewControllerAnimated:YES];
+            
+            NSLog(@"New Reminder Name: %@, Reminder Radius: %f.", reminderName, radius);
         }
     }];
 
