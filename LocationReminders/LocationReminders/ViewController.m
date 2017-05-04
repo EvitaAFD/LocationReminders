@@ -217,9 +217,9 @@
     PFQuery *reminder = [PFQuery queryWithClassName:@"Reminder"];
     [reminder findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
-            NSLog(@"Error Fetching Reminder %@", error.localizedDescription);
+            NSLog(@"Error Fetching Reminders %@", error.localizedDescription);
         } else {
-            NSLog(@"Success Fetching Reminder!");
+            NSLog(@"Success Fetching Reminders!");
         }
     }];
 }
