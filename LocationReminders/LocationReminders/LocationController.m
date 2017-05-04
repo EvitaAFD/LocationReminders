@@ -10,6 +10,8 @@
 
 #import "ViewController.h"
 
+@import UserNotifications;
+
 @import MapKit;
 
 
@@ -65,7 +67,7 @@
 
 }
 
-//MARK: User Entering and Exiting region
+//MARK: User Entered Region
 
 -(void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region {
     NSLog(@"We have sucessfully started monitoring changes for region %@", region.identifier);
@@ -73,6 +75,24 @@
 
 -(void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
     NSLog(@"User did ENTER region: %@", region.identifier);
+    
+    UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc]init];
+    content.title = @"Reminder";
+    content.body = [NSString stringWithFormat:@"%@", region.identifier];
+    content.sound = [UNNotificationSound defaultSound];
+    
+    UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:0.1 repeats:NO];
+    
+    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"Location Entered" content:content trigger:trigger];
+    
+    UNUserNotificationCenter *current = [UNUserNotificationCenter currentNotificationCenter];
+    
+    [current removeAllPendingNotificationRequests];
+    [current addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error posting user notification: %@", error.localizedDescription);
+        }
+    }];
 }
 
 //Fix enter region lack of display bug, delegate has all of these methods to prevent bug
