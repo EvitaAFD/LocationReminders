@@ -55,8 +55,6 @@
         
         [self presentViewController:loginViewController animated:YES completion:nil];
     }
-    
-    [self fecthedReminder];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
