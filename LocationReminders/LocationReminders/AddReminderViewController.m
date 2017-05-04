@@ -38,20 +38,18 @@
     
     Reminder *newReminder = [Reminder object];
     
-    newReminder.reminderName = self.annotationTitle;
+    newReminder.reminderName = self.reminderNameTextField.text;
+    newReminder.radius = [self numberFromString:self.radiusTextField.text];
     
     newReminder.location = [PFGeoPoint geoPointWithLatitude:self.coordinate.latitude longitude:self.coordinate.longitude];
     
     [newReminder saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        NSLog(@"Annotation Title: %@", self.annotationTitle);
-        NSLog(@"Coordinates: Latitude %f, Longitude %f", self.coordinate.latitude, self.coordinate.longitude);
+
         NSLog(@"Save reminder sucessful:%i - Error: %@", succeeded,error.localizedDescription);
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReminderSavedToParse" object:nil];
         
         if (self.completion) {
-            
-            NSString *reminderName = self.reminderNameTextField.text;
             
             CGFloat radius = [self.radiusTextField.text floatValue];
             
@@ -60,11 +58,16 @@
             //Execute block
             self.completion(circle);
             [self.navigationController popViewControllerAnimated:YES];
-            
-            NSLog(@"New Reminder Name: %@, Reminder Radius: %f.", reminderName, radius);
+
         }
     }];
 
+}
+
+-(NSNumber *)numberFromString:(NSString *)string {
+    NSNumberFormatter *formatString = [[NSNumberFormatter alloc]init];
+    [formatString setNumberStyle:NSNumberFormatterDecimalStyle];
+    return  [formatString numberFromString:string];
 }
 
 @end

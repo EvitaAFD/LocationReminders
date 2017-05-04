@@ -11,6 +11,8 @@
 
 #import "LocationController.h"
 
+#import "Reminder.h"
+
 @import Parse;
 @import MapKit;
 
@@ -54,6 +56,8 @@
         [self presentViewController:loginViewController animated:YES completion:nil];
     }
     
+    [self fecthedReminder];
+    
 }
 
 -(void)setMapStyle {
@@ -91,7 +95,7 @@
 
 -(void)reminderSavedToParse:(id)sender {
 
-    NSLog(@"Do some stuff since our reminder was saved!");
+    NSLog(@"Reminder saved to Parse.");
 }
 
 -(void)dealloc{
@@ -180,8 +184,6 @@
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
 
-    NSLog(@"Info Accessory Tapped!");
-
     [self performSegueWithIdentifier:@"AddReminderViewController" sender:view];
 }
 
@@ -214,13 +216,15 @@
 }
 
 -(void)fecthedReminder {
-    PFQuery *reminder = [PFQuery queryWithClassName:@"Reminder"];
-    [reminder findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+    PFQuery *reminderQuery = [PFQuery queryWithClassName:@"Reminder"];
+    [reminderQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error Fetching Reminders %@", error.localizedDescription);
-        } else {
-            NSLog(@"Success Fetching Reminders!");
         }
+        for (Reminder *reminder in objects) {
+            NSLog(@"New Reminder Name: %@, Reminder LOCATION: %@, Reminder Radius: %@.", reminder.reminderName, reminder.location, reminder.radius);
+        }
+
     }];
 }
 
