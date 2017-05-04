@@ -54,6 +54,7 @@
         loginViewController.logInView.logo = [[UIView alloc] init];
         
         [self presentViewController:loginViewController animated:YES completion:nil];
+        NSLog(@"OVERLAYS: %@", self.mapView.overlays);
     }
 }
 
@@ -226,9 +227,25 @@
         }
         for (Reminder *reminder in objects) {
             NSLog(@"New Reminder Name: %@, Reminder LOCATION: %@, Reminder Radius: %@.", reminder.reminderName, reminder.location, reminder.radius);
+            [self displayMapOverlay:reminder];
         }
 
     }];
+}
+
+-(void)displayMapOverlay:(Reminder *)reminder {
+    BOOL hasCurrentAnnotation = NO;
+    for(MKCircle *mapOverlay in self.mapView.overlays) {
+        if ((mapOverlay.coordinate.longitude == reminder.location.latitude) && (mapOverlay.coordinate.latitude == reminder.location.longitude)){
+            hasCurrentAnnotation = YES;
+            }
+        }
+        if (!hasCurrentAnnotation) {
+            CGFloat radius = [[reminder radius] floatValue];
+            CLLocationCoordinate2DMake(reminder.location.latitude, reminder.location.longitude);
+            MKCircle *overlayCircle = [MKCircle circleWithCenterCoordinate:CLLocationCoordinate2DMake(reminder.location.latitude, reminder.location.longitude) radius:radius];
+            [self.mapView addOverlay:overlayCircle];
+    }
 }
 
 
