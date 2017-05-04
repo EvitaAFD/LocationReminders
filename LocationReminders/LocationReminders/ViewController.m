@@ -11,10 +11,14 @@
 
 #import "LocationController.h"
 
+#import "Reminder.h"
+
 @import Parse;
 @import MapKit;
 
-@interface ViewController () <MKMapViewDelegate, LocationControllerDelegate>
+#import <ParseUI/ParseUI.h>
+
+@interface ViewController () <MKMapViewDelegate, LocationControllerDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
@@ -35,6 +39,28 @@
     
     [[LocationController sharedInstance] setDelegate:self];
     
+    [PFUser logOut];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reminderSavedToParse:) name:@"reminderSavedToParse" object:nil];
+    
+    if (![PFUser currentUser]) {
+        PFLogInViewController *loginViewController = [[PFLogInViewController alloc] init];
+        
+        loginViewController.delegate = self;
+        loginViewController.signUpController.delegate = self;
+        
+        loginViewController.fields = PFLogInFieldsUsernameAndPassword | PFLogInFieldsLogInButton | PFLogInFieldsFacebook | PFLogInFieldsSignUpButton;
+        
+        loginViewController.logInView.logo = [[UIView alloc] init];
+        
+        [self presentViewController:loginViewController animated:YES completion:nil];
+    }
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
+    [self fecthedReminder];
+
 }
 
 -(void)setMapStyle {
@@ -52,12 +78,33 @@
         
         newReminderViewController.coordinate = annotationView.annotation.coordinate;
         newReminderViewController.annotationTitle = annotationView.annotation.title;
-        newReminderViewController.title = annotationView.annotation.title; 
+        newReminderViewController.title = annotationView.annotation.title;
+        
+       
+//hulk strong reference bruce weak pointer, makes bridge into block to avoid retain cycle
+        __weak typeof(self) bruce = self;
+        
+        newReminderViewController.completion = ^(MKCircle *circle) {
+            
+            __strong typeof(bruce) hulk = bruce;
+            
+            [hulk.mapView removeAnnotation:annotationView.annotation];
+            [hulk.mapView addOverlay:circle];
+        };
         
     }
     
 }
 
+-(void)reminderSavedToParse:(id)sender {
+
+    NSLog(@"Reminder saved to Parse.");
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ReminderSavedToParse" object:nil];
+
+}
 
 //MARK: Actions
 - (IBAction)location1ButtonPressed:(id)sender {
@@ -119,10 +166,13 @@
     
     MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"annotationView"];
     
+    
     annotationView.annotation = annotation;
     
+
     if (!annotationView) {
         annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"annotationView"];
+        [annotationView setPinTintColor:[UIColor colorWithHue:drand48() saturation:1.0 brightness:1.0 alpha:1.0]];
     }
     
     annotationView.canShowCallout = YES;
@@ -137,9 +187,6 @@
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
 
-    NSLog(@"Info Accessory Tapped!");
-
-    
     [self performSegueWithIdentifier:@"AddReminderViewController" sender:view];
 }
 
@@ -148,6 +195,40 @@
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(location.coordinate, 200.00, 200.00);
     
     [self.mapView setRegion:region animated:YES];
+}
+
+-(MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+    MKCircleRenderer *renderer = [[MKCircleRenderer alloc] initWithCircle:overlay];
+    
+    renderer.strokeColor = [UIColor colorWithRed:0.62 green:0.22 blue:0.94 alpha:1.0];
+    renderer.fillColor = [UIColor colorWithRed:0.22 green:0.94 blue:0.89 alpha:1.0];
+    renderer.alpha = 0.30;
+    
+    return renderer;
+
+}
+
+-(void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
+
+    [self  dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
+
+    [self  dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)fecthedReminder {
+    PFQuery *reminderQuery = [PFQuery queryWithClassName:@"Reminder"];
+    [reminderQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error Fetching Reminders %@", error.localizedDescription);
+        }
+        for (Reminder *reminder in objects) {
+            NSLog(@"New Reminder Name: %@, Reminder LOCATION: %@, Reminder Radius: %@.", reminder.reminderName, reminder.location, reminder.radius);
+        }
+
+    }];
 }
 
 
