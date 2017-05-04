@@ -57,7 +57,12 @@
     }
     
     [self fecthedReminder];
-    
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
+    [self fecthedReminder];
+
 }
 
 -(void)setMapStyle {
