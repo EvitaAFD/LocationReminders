@@ -23,7 +23,11 @@
 @property (weak, nonatomic) id<LocationControllerDelegate> delegate;
 
 +(LocationController *)sharedInstance;
+
 -(void)requestPermissions;
+
+-(void)startMonitoringForRegion:(CLRegion *)region;
+
 
 
 @end

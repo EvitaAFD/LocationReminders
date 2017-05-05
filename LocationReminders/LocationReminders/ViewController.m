@@ -54,6 +54,7 @@
         loginViewController.logInView.logo = [[UIView alloc] init];
         
         [self presentViewController:loginViewController animated:YES completion:nil];
+        NSLog(@"OVERLAYS: %@", self.mapView.overlays);
     }
 }
 
@@ -107,6 +108,16 @@
 }
 
 //MARK: Actions
+- (IBAction)currentLocationButtonPressed:(id)sender {
+    
+    self.mapView.showsUserLocation = YES;
+    MKCoordinateRegion currentRegion = MKCoordinateRegionMakeWithDistance(self.mapView.userLocation.coordinate, 500.00, 500.00);
+    
+    [self.mapView setRegion:currentRegion animated:YES];
+    
+}
+
+
 - (IBAction)location1ButtonPressed:(id)sender {
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.6566674, -122.351096);
     
@@ -201,7 +212,7 @@
     MKCircleRenderer *renderer = [[MKCircleRenderer alloc] initWithCircle:overlay];
     
     renderer.strokeColor = [UIColor colorWithRed:0.62 green:0.22 blue:0.94 alpha:1.0];
-    renderer.fillColor = [UIColor colorWithRed:0.22 green:0.94 blue:0.89 alpha:1.0];
+    renderer.fillColor = [UIColor colorWithHue:drand48() saturation:1.0 brightness:1.0 alpha:1.0];
     renderer.alpha = 0.30;
     
     return renderer;
@@ -226,9 +237,25 @@
         }
         for (Reminder *reminder in objects) {
             NSLog(@"New Reminder Name: %@, Reminder LOCATION: %@, Reminder Radius: %@.", reminder.reminderName, reminder.location, reminder.radius);
+            [self displayMapOverlay:reminder];
         }
 
     }];
+}
+
+-(void)displayMapOverlay:(Reminder *)reminder {
+    BOOL hasCurrentAnnotation = NO;
+    for(MKCircle *mapOverlay in self.mapView.overlays) {
+        if ((mapOverlay.coordinate.longitude == reminder.location.latitude) && (mapOverlay.coordinate.latitude == reminder.location.longitude)){
+            hasCurrentAnnotation = YES;
+            }
+        }
+        if (!hasCurrentAnnotation) {
+            CGFloat radius = [[reminder radius] floatValue];
+            CLLocationCoordinate2DMake(reminder.location.latitude, reminder.location.longitude);
+            MKCircle *overlayCircle = [MKCircle circleWithCenterCoordinate:CLLocationCoordinate2DMake(reminder.location.latitude, reminder.location.longitude) radius:radius];
+            [self.mapView addOverlay:overlayCircle];
+    }
 }
 
 
